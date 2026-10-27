@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuickPass Saver</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <span class="logo">🔐</span>
+      <div>
+        <h1>QuickPass Saver</h1>
+        <p id="current-domain" class="subtitle">Đang kiểm tra trang...</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="btn-toggle-add" class="btn-icon" title="Thêm tài khoản mới">＋ Thêm</button>
+    </div>
+  </div>
+
+  <!-- Thanh cài đặt bật/tắt tự động điền + Backup -->
+  <div class="toolbar">
+    <label class="toggle-label" title="Tự động điền ngay khi mở trang đăng nhập">
+      <input type="checkbox" id="chk-autofill" checked />
+      <span>Tự động điền khi mở trang</span>
+    </label>
+    <div class="backup-actions">
+      <button id="btn-export" class="btn-link" title="Xuất file JSON backup">Xuất</button>
+      <span>·</span>
+      <button id="btn-import" class="btn-link" title="Nhập từ file JSON">Nhập</button>
+      <input type="file" id="file-import" accept=".json" hidden />
+    </div>
+  </div>
+
+  <!-- Form thêm / sửa tài khoản -->
+  <div id="form-panel" class="form-panel hidden">
+    <div class="form-title" id="form-title">Thêm tài khoản mới</div>
+    <input type="hidden" id="edit-id" />
+    <div class="form-group">
+      <label>Tên miền (Domain)</label>
+      <input type="text" id="inp-domain" placeholder="vd: github.com" />
+    </div>
+    <div class="form-group">
+      <label>Tài khoản / Email</label>
+      <input type="text" id="inp-username" placeholder="Nhập username hoặc email" />
+    </div>
+    <div class="form-group">
+      <label>Mật khẩu</label>
+      <div class="pass-wrapper">
+        <input type="password" id="inp-password" placeholder="Nhập mật khẩu" />
+        <button type="button" id="btn-eye" class="btn-eye" title="Hiện/Ẩn">👁</button>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button id="btn-cancel" class="btn-secondary">Hủy</button>
+      <button id="btn-save" class="btn-primary">Lưu lại</button>
+    </div>
+  </div>
+
+  <!-- Ô tìm kiếm -->
+  <div class="search-box">
+    <input type="text" id="inp-search" placeholder="🔍 Tìm theo domain hoặc tài khoản..." />
+  </div>
+
+  <!-- Danh sách tài khoản khớp với trang hiện tại -->
+  <div id="current-site-section" class="section hidden">
+    <div class="section-title">Trang hiện tại</div>
+    <div id="current-site-list" class="account-list"></div>
+  </div>
+
+  <!-- Danh sách tất cả tài khoản -->
+  <div class="section">
+    <div class="section-title" id="all-accounts-title">Tất cả tài khoản đã lưu (0)</div>
+    <div id="all-accounts-list" class="account-list"></div>
+  </div>
+
+  <div id="toast" class="toast hidden">Đã sao chép!</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
